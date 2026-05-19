@@ -3,171 +3,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Compress images instantly without uploading. Reduce file size while keeping quality. Supports JPG, PNG, WebP, GIF. Free, fast, and private.">
-  <title>Squish — Free Image Compressor</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Compress images instantly in your browser. No uploads, no servers, 100% private. JPG, PNG, WebP, GIF supported.">
+  <title>Snip — Free Image Compressor</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗜️</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <!-- Header -->
-  <header class="header">
+  <header class="site-header">
     <div class="header-inner">
-      <a href="/" class="logo">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <rect x="2" y="8" width="24" height="16" rx="3" fill="#3b82f6"/>
-          <rect x="6" y="4" width="16" height="20" rx="2" fill="#60a5fa"/>
-          <path d="M10 12h8M10 16h5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <a href="/" class="brand">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+          <rect x="2" y="7" width="22" height="15" rx="3" fill="#3b82f6"/>
+          <rect x="5" y="3" width="16" height="19" rx="2" fill="#60a5fa"/>
+          <path d="M9 11h8M9 15h5" stroke="white" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        Squish
+        Snip
       </a>
       <nav class="header-nav">
-        <a href="#compress">Compress</a>
         <a href="#features">Features</a>
         <a href="#faq">FAQ</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero" id="compress">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <div class="hero-badge">100% Free · No Upload · Instant Results</div>
-      <h1>Compress Images<br>in Seconds</h1>
-      <p>Drag and drop your images here, or click to browse. We'll compress them instantly — right in your browser. No servers, no uploads, completely private.</p>
+  <!-- Main Compressor -->
+  <main class="compressor" id="compressor">
+    <div class="compressor-inner">
 
-      <!-- Drop Zone -->
-      <div class="drop-zone" id="dropZone">
-        <div class="drop-zone-inner">
-          <div class="drop-icon">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-              <circle cx="32" cy="32" r="30" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6 4"/>
-              <path d="M32 20v24M20 32h24" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <p class="drop-title">Drop images here</p>
-          <p class="drop-sub">or <button class="browse-btn" id="browseBtn">browse files</button></p>
-          <p class="drop-formats">Supports JPG, PNG, WebP, GIF · Max 50MB per file</p>
+      <!-- Hero Text -->
+      <div class="compressor-header">
+        <div class="pill-label">100% Free · No Upload · Private</div>
+        <h1>Compress Images<br>in One Click</h1>
+        <p>Drop your images below and get a compressed version instantly. All processing happens in your browser — nothing is uploaded.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-zone-inner" id="uploadZoneInner">
+          <svg class="upload-icon" width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <circle cx="28" cy="28" r="26" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5 3"/>
+            <path d="M28 18v16M18 28h16" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <p class="upload-title">Drop images here</p>
+          <p class="upload-subtitle">or <button class="upload-browse" id="browseBtn">browse files</button></p>
+          <p class="upload-formats">JPG · PNG · WebP · GIF · Max 50 MB per file</p>
         </div>
         <input type="file" id="fileInput" multiple accept="image/jpeg,image/png,image/webp,image/gif" hidden>
       </div>
 
-      <!-- Settings Bar -->
-      <div class="settings-bar" id="settingsBar">
-        <div class="setting-group">
-          <label>Format</label>
+      <!-- Controls -->
+      <div class="controls" id="controls">
+        <div class="control-group">
+          <label for="outputFormat">Format</label>
           <select id="outputFormat">
             <option value="jpeg">JPG</option>
             <option value="png">PNG</option>
             <option value="webp">WebP</option>
           </select>
         </div>
-        <div class="setting-group">
-          <label>Quality</label>
-          <div class="quality-slider-wrap">
+        <div class="control-group">
+          <label for="qualitySlider">Quality</label>
+          <div class="slider-wrap">
             <input type="range" id="qualitySlider" min="10" max="100" value="80">
-            <span class="quality-val" id="qualityVal">80%</span>
+            <span class="slider-val" id="qualityVal">80%</span>
           </div>
         </div>
-        <div class="setting-group">
-          <label>Max Width</label>
+        <div class="control-group">
+          <label for="maxWidth">Max Width</label>
           <input type="number" id="maxWidth" value="2000" min="100" max="8000" step="100">
         </div>
-        <button class="btn-compress" id="compressBtn">
+        <button class="btn-compress" id="compressBtn" disabled>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 12.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zM6.5 5h3v4.25L7.75 7 6.5 8.5V5z"/></svg>
-          Compress All
+          Compress
         </button>
       </div>
-    </div>
-  </section>
 
-  <!-- Results -->
-  <section class="results" id="results" style="display:none">
-    <div class="results-inner">
-      <div class="results-summary" id="resultsSummary">
-        <span id="resultCount">0</span> images compressed · 
-        Saved <span id="totalSaved">0 KB</span>
+      <!-- File Previews -->
+      <div class="file-previews" id="filePreviews"></div>
+
+      <!-- Results -->
+      <div class="results-area" id="resultsArea" style="display:none">
+        <div class="results-summary" id="resultsSummary"></div>
+        <div class="results-grid" id="resultsGrid"></div>
+        <div class="results-footer">
+          <button class="btn-download-all" id="downloadAllBtn">⬇ Download All</button>
+          <button class="btn-reset" id="resetBtn">↺ Start Over</button>
+        </div>
       </div>
-      <div class="results-grid" id="resultsGrid"></div>
-      <div class="results-actions">
-        <button class="btn-download-all" id="downloadAllBtn">
-          ⬇ Download All
-        </button>
-        <button class="btn-reset" id="resetBtn">
-          ↺ Compress More
-        </button>
-      </div>
+
     </div>
-  </section>
+  </main>
 
   <!-- Features -->
-  <section class="features" id="features">
-    <div class="features-inner">
-      <h2>Why Squish?</h2>
+  <section class="features-section" id="features">
+    <div class="section-inner">
+      <h2>Why Use Snip?</h2>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">🔒</div>
           <h3>100% Private</h3>
-          <p>Your images never leave your device. All compression happens locally in your browser — your files stay yours.</p>
+          <p>Your images never leave your browser. All compression is done locally on your device — your files stay completely private.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
-          <h3>Lightning Fast</h3>
-          <p>Powered by browser APIs, Squish compresses images in seconds. No waiting for uploads or server processing.</p>
+          <h3>Instant Results</h3>
+          <p>No server uploads, no waiting. Compress images in seconds right as you browse. Fast on any device.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🎨</div>
-          <h3>Format Flexible</h3>
-          <p>Convert between JPG, PNG, and WebP. Choose the best format for your use case — web, print, or存档.</p>
+          <h3>Format Conversion</h3>
+          <p>Convert between JPG, PNG, and WebP. Pick the best format for your use case — web, print, or archiving.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">📱</div>
-          <h3>Any Device</h3>
-          <p>Works perfectly on desktop, tablet, and mobile. Built with responsive design for the best experience everywhere.</p>
+          <h3>Works Everywhere</h3>
+          <p>Fully responsive design for desktop, tablet, and mobile. Works perfectly regardless of screen size.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">💾</div>
-          <h3>Batch Ready</h3>
-          <p>Compress multiple images at once. No limits, no watermarks, no sign-ups. Process as many as you need.</p>
+          <div class="feature-icon">📦</div>
+          <h3>Batch Processing</h3>
+          <p>Compress multiple images at once. No file limits, no watermarks. Process as many as you need at once.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🌍</div>
+          <div class="feature-icon">💚</div>
           <h3>Always Free</h3>
-          <p>No subscriptions, no hidden fees, no file limits. Squish is and always will be completely free to use.</p>
+          <p>No subscriptions, no sign-ups, no hidden fees. Snip is completely free to use, today and always.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq" id="faq">
-    <div class="faq-inner">
-      <h2>Frequently Asked Questions</h2>
+  <section class="faq-section" id="faq">
+    <div class="section-inner">
+      <h2>FAQ</h2>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Is my data kept private? <span class="faq-toggle">+</span></button>
-          <div class="faq-a">Yes. Squish processes all images directly in your browser using JavaScript. Your files are never uploaded to any server — they stay on your device the entire time.</div>
+          <button class="faq-question" onclick="toggleFaq(this)">Is my data kept private? <span class="faq-chevron">+</span></button>
+          <div class="faq-answer">Yes — all image compression happens directly in your browser using JavaScript. Your files are never uploaded to any server. They stay on your device 100% of the time.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">What image formats are supported? <span class="faq-toggle">+</span></button>
-          <div class="faq-a">Squish supports JPG/JPEG, PNG, WebP, and GIF input. You can output to JPG, PNG, or WebP format. All processing is done client-side.</div>
+          <button class="faq-question" onclick="toggleFaq(this)">What formats are supported? <span class="faq-chevron">+</span></button>
+          <div class="faq-answer">Snip supports JPG, PNG, WebP, and GIF as input formats. You can output to JPG, PNG, or WebP — with full quality control for each.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">What's the maximum file size? <span class="faq-toggle">+</span></button>
-          <div class="faq-a">There's no hard limit — it depends on your device's memory. We recommend files under 50MB for the smoothest experience. Very large images may take a few seconds to process.</div>
+          <button class="faq-question" onclick="toggleFaq(this)">What quality should I use? <span class="faq-chevron">+</span></button>
+          <div class="faq-answer">80% is the sweet spot for most use cases — great balance between file size and visual quality. For web images, 60–70% is usually fine. For photography or print, try 90% or higher.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">What's the best quality setting? <span class="faq-toggle">+</span></button>
-          <div class="faq-a">80% quality is a great balance between file size and visual fidelity. For web images, 60–70% is usually sufficient. For print or detailed photography, try 90% or higher.</div>
+          <button class="faq-question" onclick="toggleFaq(this)">What's the max file size? <span class="faq-chevron">+</span></button>
+          <div class="faq-answer">Files up to 50 MB are recommended for the smoothest experience. Very large images may take a moment to process depending on your device.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Can I convert between formats? <span class="faq-toggle">+</span></button>
-          <div class="faq-a">Absolutely! You can convert PNG to JPG, JPG to WebP, or any combination. Just select your desired output format in the settings bar before compressing.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Does Squish work offline? <span class="faq-toggle">+</span></button>
-          <div class="faq-a">Once you've loaded the page, yes! Squish requires no external servers or APIs. All compression logic runs in your browser, so it works even without an internet connection.</div>
+          <button class="faq-question" onclick="toggleFaq(this)">Can I convert formats? <span class="faq-chevron">+</span></button>
+          <div class="faq-answer">Yes! Select your desired output format (JPG, PNG, or WebP) in the settings before compressing. You can convert between any of these formats.</div>
         </div>
       </div>
     </div>
@@ -176,16 +167,16 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-logo">
-        <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
-          <rect x="2" y="8" width="24" height="16" rx="3" fill="#3b82f6"/>
-          <rect x="6" y="4" width="16" height="20" rx="2" fill="#60a5fa"/>
-          <path d="M10 12h8M10 16h5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <div class="footer-brand">
+        <svg width="22" height="22" viewBox="0 0 26 26" fill="none">
+          <rect x="2" y="7" width="22" height="15" rx="3" fill="#3b82f6"/>
+          <rect x="5" y="3" width="16" height="19" rx="2" fill="#60a5fa"/>
+          <path d="M9 11h8M9 15h5" stroke="white" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        Squish
+        Snip
       </div>
-      <p class="footer-tagline">Free, instant, private image compression — right in your browser.</p>
-      <p class="footer-copy">© 2026 Squish · All rights reserved</p>
+      <p class="footer-desc">Free, instant, private image compression — right in your browser.</p>
+      <p class="footer-copy">© 2026 Snip · All rights reserved</p>
     </div>
   </footer>
 
