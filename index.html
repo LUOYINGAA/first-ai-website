@@ -3,717 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>心动小镇 · 新手保姆级攻略 | GameGuide</title>
+    <title>心动小镇·新手保姆级攻略</title>
     <style>
-        /* ===== 全局样式 ===== */
-        :root {
-            --primary: #FF6B9D;
-            --primary-dark: #E84E7A;
-            --secondary: #FFB347;
-            --accent: #7EC8E3;
-            --bg: #FFF5F7;
-            --card-bg: #FFFFFF;
-            --text: #2D2D2D;
-            --text-light: #777777;
-            --border: #FFE0E8;
-            --success: #6BCB77;
-            --warning: #FFD93D;
-            --danger: #FF6B6B;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.8;
+        /* 全局配色，和你现有的粉色风格统一 */
+        :root {
+            --main-pink: #ff6b9d;
+            --light-pink: #ffe6ee;
+            --text-dark: #333;
+            --text-gray: #666;
+            --success-green: #4CAF50;
         }
 
-        /* ===== 顶部导航 ===== */
-        .top-bar {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        /* 头部导航 */
+        .header {
+            background-color: var(--main-pink);
             color: white;
+            padding: 30px 20px;
             text-align: center;
-            padding: 40px 20px;
-            position: relative;
-            overflow: hidden;
         }
 
-        .top-bar::before {
-            content: "🏠🏡🌸🦋💕";
-            position: absolute;
-            top: 10px;
-            left: 0;
-            right: 0;
-            font-size: 24px;
-            letter-spacing: 20px;
-            opacity: 0.3;
-        }
-
-        .top-bar h1 {
-            font-size: 2.5rem;
+        .header h1 {
+            font-size: 2.2em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
         }
 
-        .top-bar p {
-            font-size: 1.1rem;
+        .header p {
+            font-size: 1.1em;
             opacity: 0.9;
         }
 
-        .version-tag {
+        .tag {
             display: inline-block;
-            background: rgba(255,255,255,0.25);
-            padding: 4px 16px;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            margin-top: 12px;
-            backdrop-filter: blur(4px);
+            margin-top: 15px;
+            font-size: 0.9em;
         }
 
-        /* ===== 目录导航 ===== */
-        .nav-toc {
-            background: var(--card-bg);
-            border-bottom: 2px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .nav-toc ul {
-            list-style: none;
+        /* 导航栏 */
+        .nav {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            padding: 0;
-            max-width: 900px;
-            margin: 0 auto;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
         }
 
-        .nav-toc li a {
-            display: block;
-            padding: 14px 20px;
+        .nav a {
+            padding: 15px 20px;
             text-decoration: none;
-            color: var(--text-light);
-            font-weight: 600;
-            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: bold;
             transition: all 0.3s;
-            border-bottom: 3px solid transparent;
         }
 
-        .nav-toc li a:hover {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-            background: #FFF0F4;
+        .nav a:hover, .nav a.active {
+            color: var(--main-pink);
+            border-bottom: 3px solid var(--main-pink);
         }
 
-        /* ===== 主容器 ===== */
+        /* 内容区通用样式 */
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px 20px 60px;
-        }
-
-        /* ===== 模块通用 ===== */
-        .section {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 30px 35px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 20px rgba(255,107,157,0.08);
-            border: 1px solid var(--border);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .section:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255,107,157,0.12);
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
         .section-title {
-            font-size: 1.5rem;
-            color: var(--primary-dark);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid var(--primary);
+            color: var(--main-pink);
+            font-size: 1.5em;
+            margin: 40px 0 20px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .section-title .icon {
-            font-size: 1.8rem;
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--main-pink), transparent);
         }
 
-        /* ===== 标签/徽章 ===== */
-        .badge {
-            display: inline-block;
-            padding: 3px 12px;
-            border-radius: 12px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            margin-right: 6px;
-            margin-bottom: 6px;
+        /* 游戏介绍模块 */
+        .intro-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(255,107,157,0.1);
+            line-height: 1.8;
+            color: var(--text-dark);
         }
 
-        .badge-hot { background: #FFE0E6; color: var(--primary-dark); }
-        .badge-tip { background: #E0F7FA; color: #00838F; }
-        .badge-warn { background: #FFF9C4; color: #F57F17; }
-        .badge-danger { background: #FFCDD2; color: #C62828; }
-        .badge-success { background: #C8E6C9; color: #2E7D32; }
-
-        /* ===== 步骤列表 ===== */
-        .step-list {
-            list-style: none;
-            counter-reset: step;
-        }
-
-        .step-list li {
-            counter-increment: step;
-            position: relative;
-            padding: 14px 14px 14px 50px;
-            margin-bottom: 12px;
-            background: #FFFAFB;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary);
-            transition: background 0.3s;
-        }
-
-        .step-list li:hover {
-            background: #FFF0F4;
-        }
-
-        .step-list li::before {
-            content: counter(step);
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 28px;
-            height: 28px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
+        .feature-list {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.85rem;
-        }
-
-        /* ===== 卡片网格 ===== */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .card-item {
-            background: linear-gradient(135deg, #FFF5F7, #FFF0F4);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
+            justify-content: space-around;
+            margin-top: 30px;
             text-align: center;
-            transition: transform 0.3s;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .card-item:hover {
-            transform: scale(1.03);
+        .feature-item {
+            flex: 1;
+            min-width: 120px;
         }
 
-        .card-item .card-icon {
-            font-size: 2.5rem;
+        .feature-item .icon {
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
 
-        .card-item h4 {
-            color: var(--primary-dark);
-            margin-bottom: 6px;
+        .feature-item p {
+            color: var(--main-pink);
+            font-weight: bold;
         }
 
-        .card-item p {
-            font-size: 0.9rem;
-            color: var(--text-light);
+        /* 新增：每日打卡清单模块 */
+        .checklist-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(255,107,157,0.1);
         }
 
-        /* ===== 表格 ===== */
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 12px;
-            font-size: 0.95rem;
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
         }
 
-        .info-table th {
-            background: var(--primary);
-            color: white;
-            padding: 12px 16px;
-            text-align: left;
-            border-radius: 8px 8px 0 0;
+        .checklist-item:hover {
+            background: var(--light-pink);
         }
 
-        .info-table td {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .info-table tr:nth-child(even) td {
-            background: #FFFAFB;
-        }
-
-        .info-table tr:hover td {
-            background: #FFF0F4;
-        }
-
-        /* ===== 清单 ===== */
-        .checklist {
-            list-style: none;
-        }
-
-        .checklist li {
-            padding: 10px 0 10px 34px;
-            position: relative;
-            border-bottom: 1px dashed var(--border);
-            font-size: 0.95rem;
-        }
-
-        .checklist li:last-child {
+        .checklist-item:last-child {
             border-bottom: none;
         }
 
-        .checklist li::before {
-            content: "☐";
-            position: absolute;
-            left: 0;
-            font-size: 1.3rem;
-            color: var(--primary);
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            accent-color: var(--main-pink);
         }
 
-        .checklist li.done::before {
-            content: "☑";
-            color: var(--success);
+        .checklist-item label {
+            flex: 1;
+            font-size: 1.1em;
+            cursor: pointer;
         }
 
-        /* ===== 高亮框 ===== */
-        .highlight-box {
-            background: linear-gradient(135deg, #FFF9C4, #FFF59D);
-            border-left: 5px solid var(--warning);
-            padding: 18px 22px;
-            border-radius: 0 12px 12px 0;
-            margin: 16px 0;
-            font-size: 0.95rem;
+        .checklist-item .reward {
+            color: var(--success-green);
+            font-weight: bold;
+            margin-left: 10px;
         }
 
-        .danger-box {
-            background: linear-gradient(135deg, #FFCDD2, #EF9A9A);
-            border-left: 5px solid var(--danger);
-            padding: 18px 22px;
-            border-radius: 0 12px 12px 0;
-            margin: 16px 0;
-            font-size: 0.95rem;
-        }
-
-        .tip-box {
-            background: linear-gradient(135deg, #E0F7FA, #B2EBF2);
-            border-left: 5px solid var(--accent);
-            padding: 18px 22px;
-            border-radius: 0 12px 12px 0;
-            margin: 16px 0;
-            font-size: 0.95rem;
-        }
-
-        /* ===== 页脚 ===== */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        /* ===== 响应式 ===== */
-        @media (max-width: 600px) {
-            .top-bar h1 { font-size: 1.8rem; }
-            .section { padding: 20px; }
-            .section-title { font-size: 1.25rem; }
-            .nav-toc li a { padding: 10px 14px; font-size: 0.8rem; }
-        }
-
-        /* ===== 动画 ===== */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .section:nth-child(2) { animation-delay: 0.1s; }
-        .section:nth-child(3) { animation-delay: 0.2s; }
-        .section:nth-child(4) { animation-delay: 0.3s; }
-        .section:nth-child(5) { animation-delay: 0.4s; }
-        .section:nth-child(6) { animation-delay: 0.5s; }
-
-        /* ===== 进度条 ===== */
         .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            margin-top: 8px;
+            margin-top: 20px;
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 4px;
-            transition: width 1s ease;
+            background: linear-gradient(to right, var(--main-pink), #ff9eb8);
+            width: 0%;
+            transition: width 0.3s;
         }
 
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 4px;
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            color: var(--text-gray);
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-gray);
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
-
-    <!-- ===== 顶部 Banner ===== -->
-    <div class="top-bar">
-        <h1>🏘️ 心动小镇 · 新手保姆级攻略</h1>
+    <!-- 头部 -->
+    <div class="header">
+        <h1>🏠 心动小镇·新手保姆级攻略</h1>
         <p>从零开始，轻松上手！一篇攻略搞定所有难题 ✨</p>
-        <span class="version-tag">📌 2025 最新版 · 持续更新中</span>
+        <div class="tag">💖 2025最新版 · 持续更新中</div>
     </div>
 
-    <!-- ===== 目录导航 ===== -->
-    <nav class="nav-toc">
-        <ul>
-            <li><a href="#intro">📖 游戏介绍</a></li>
-            <li><a href="#start">🚀 开局流程</a></li>
-            <li><a href="#welfare">🎁 隐藏福利</a></li>
-            <li><a href="#pitfall">⚠️ 避坑指南</a></li>
-            <li><a href="#daily">✅ 每日必做</a></li>
-            <li><a href="#tips">💡 实用技巧</a></li>
-        </ul>
-    </nav>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <a href="#intro" class="active">游戏介绍</a>
+        <a href="#start">开局流程</a>
+        <a href="#welfare">隐藏福利</a>
+        <a href="#trap">避坑指南</a>
+        <a href="#daily">每日必做</a>
+        <a href="#tips">实用技巧</a>
+    </div>
 
-    <!-- ===== 主内容区 ===== -->
     <div class="container">
-
-        <!-- ===== 模块一：游戏介绍 ===== -->
-        <section class="section" id="intro">
-            <h2 class="section-title"><span class="icon">📖</span> 游戏介绍</h2>
-            <p style="margin-bottom: 16px;">
-                <strong>《心动小镇》</strong> 是一款超治愈的 <span class="badge badge-hot">开放世界社交模拟</span> 手游，
-                主打 <span class="badge badge-tip">自由建造 · 田园生活 · 邻里社交</span>。
-                在这里你可以拥有自己的小岛，种花养猫、开店经商、和好友一起探索无限可能！
-            </p>
-
-            <div class="card-grid">
-                <div class="card-item">
-                    <div class="card-icon">🏡</div>
-                    <h4>自由建造</h4>
-                    <p>海量家具DIY，打造梦想小屋</p>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon">🌸</div>
-                    <h4>田园种养</h4>
-                    <p>种菜养花养宠物，治愈满分</p>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon">🏪</div>
-                    <h4>开店经商</h4>
-                    <p>开餐厅、摆地摊，做小镇首富</p>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon">👥</div>
-                    <h4>社交互动</h4>
-                    <p>串门拜访、组队冒险、恋爱交友</p>
+        <!-- 游戏介绍模块 -->
+        <div id="intro">
+            <h2 class="section-title">📖 游戏介绍</h2>
+            <div class="intro-card">
+                <p>《心动小镇》是一款超治愈的开放世界社交模拟手游，主打<strong>自由建造·田园生活·邻里社交</strong>。在这里你可以拥有自己的小岛，种花养猫、开店经商、和好友一起探索无限可能！</p>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="icon">🏠</div>
+                        <p>自由建造</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">🌸</div>
+                        <p>田园种养</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">🏪</div>
+                        <p>开店经商</p>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="highlight-box" style="margin-top:20px;">
-                🌟 <strong>适合人群：</strong>喜欢模拟经营、社交互动、休闲治愈类游戏的玩家。
-                零氪也能玩得很开心，但稍微氪一点体验会好很多哦~
-            </div>
-        </section>
-
-        <!-- ===== 模块二：新手开局流程 ===== -->
-        <section class="section" id="start">
-            <h2 class="section-title"><span class="icon">🚀</span> 新手开局保姆级流程</h2>
-
-            <ol class="step-list">
-                <li>
-                    <strong>创建角色 & 选择小镇</strong><br>
-                    进入游戏后先捏脸（建议选可爱风，后续搭配多），然后选择你的初始小镇。
-                    推荐新手选 <strong>「樱花镇」</strong>，资源多、NPC友好、任务简单。
-                </li>
-                <li>
-                    <strong>跟着主线走，别乱跑！</strong><br>
-                    前30分钟 <span class="badge badge-danger">务必跟着主线任务走</span>，
-                    主线会教你所有基础操作（移动、采集、建造、社交），还送大量经验和金币。
-                </li>
-                <li>
-                    <strong>领取新手大礼包</strong><br>
-                    主线做到「安家」任务时，会送你 <strong>一套基础家具 + 5000金币 + 10个加速券</strong>，
-                    别忘了在邮箱里领！（很多人忽略了邮箱 😭）
-                </li>
-                <li>
-                    <strong>优先升级「工作台」</strong><br>
-                    工作台等级决定你能造什么。前期金币全部投入升级工作台，
-                    优先解锁 <strong>「农具」→「料理台」→「织布机」</strong> 这条线。
-                </li>
-                <li>
-                    <strong>第一天目标：Lv.5 + 建好房子 + 种上第一块田</strong><br>
-                    按这个节奏走，第一天就能站稳脚跟。房子建议选 <strong>「湖畔小屋」</strong>，
-                    靠近水源，种田效率+20%。
-                </li>
-                <li>
-                    <strong>加好友！加好友！加好友！</strong><br>
-                    重要的事情说三遍。游戏里好友可以互相浇水、帮忙加速、一起做任务。
-                    开局在世界频道喊一声，很快就能加到一群活跃好友 💪
-                </li>
-            </ol>
-
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 85%;"></div>
-            </div>
-            <div class="progress-label">
-                <span>新手进度参考</span>
-                <span>85%</span>
-            </div>
-        </section>
-
-        <!-- ===== 模块三：隐藏福利 ===== -->
-        <section class="section" id="welfare">
-            <h2 class="section-title"><span class="icon">🎁</span> 隐藏福利领取方式</h2>
-
-            <p style="margin-bottom: 16px;">这些福利官方不会主动告诉你，知道的人都在偷偷领！👇</p>
-
-            <table class="info-table">
-                <thead>
-                    <tr>
-                        <th>福利名称</th>
-                        <th>领取方式</th>
-                        <th>奖励内容</th>
-                        <th>有效期限</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="badge badge-hot">🔥 预约礼包</span></td>
-                        <td>设置 → 兑换码 → 输入 <strong>XDZX2025</strong></td>
-                        <td>金币×10000 + 钻石×100 + 限定家具×1</td>
-                        <td>长期有效</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-hot">🔥 关注礼包</span></td>
-                        <td>游戏内「社区」→ 关注官方账号截图 → 找客服领取</td>
-                        <td>限定时装×1 + 加速券×5</td>
-                        <td>2025.12.31 前</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-tip">💎 签到7天隐藏奖励</span></td>
-                        <td>连续签到第7天，不要手动领取，等系统弹窗</td>
-                        <td>稀有宠物「星光猫」🐱</td>
-                        <td>永久</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-tip">💎 生日福利</span></td>
-                        <td>设置里填写真实生日，生日当天登录</td>
-                        <td>生日蛋糕家具 + 金币×8888</td>
-                        <td>每年一次</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-tip">💎 分享隐藏码</span></td>
-                        <td>在任意社交平台分享游戏截图，私信官方获取</td>
-                        <td>钻石×50（每月1次）</td>
-                        <td>每月重置</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">✅ 回归老玩家礼包</span></td>
-                        <td>超过7天未登录，回归后自动触发邮件</td>
-                        <td>全套回归礼包（超丰厚）</td>
-                        <td>回归后7天内</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="highlight-box" style="margin-top:16px;">
-                🔑 <strong>万能兑换码合集（2025最新）：</strong><br>
-                <code style="background:rgba(0,0,0,0.08);padding:2px 8px;border-radius:4px;font-size:0.9rem;">
-                    XDZX666 &nbsp;|&nbsp; XDZX888 &nbsp;|&nbsp; LOVE2025 &nbsp;|&nbsp; HEART520
-                </code><br>
-                <small>（全部大写，没有空格，每个号限用一次）</small>
-            </div>
-        </section>
-
-        <!-- ===== 模块四：避坑指南 ===== -->
-        <section class="section" id="pitfall">
-            <h2 class="section-title"><span class="icon">⚠️</span> 避坑指南（血泪教训）</h2>
-
-            <div class="danger-box">
-                🚨 <strong>坑1：前期别乱花钻石！</strong><br>
-                钻石是最珍贵的货币，前期千万别拿去抽卡/买时装！
-                全部存着，等 <strong>「限时折扣商店」</strong> 买 <strong>「扩建许可」</strong> 和 <strong>「高级种子」</strong>，性价比最高。
-            </div>
-
-            <div class="danger-box">
-                🚨 <strong>坑2：别急着升级小镇等级！</strong><br>
-                很多新手一上来就猛升级小镇，结果发现高级材料全靠肝。
-                正确做法：先把 <strong>个人等级拉到15级</strong>，解锁全部基础功能后再升小镇。
-            </div>
-
-            <div class="danger-box">
-                🚨 <strong>坑3：家具别乱摆！</strong><br>
-                家具摆放影响「小镇评分」，评分高了每天领的奖励更多。
-                <strong>客厅家具放中间，功能家具靠墙放，留出走道！</strong>
-                （亲测评分能差200+）
-            </div>
-
-            <div class="danger-box">
-                🚨 <strong>坑4：别忽略「每日商路」！</strong><br>
-                很多人不知道每天可以跑商路赚金币。商路每天刷新3次，
-                每次大约赚 <strong>3000-5000金币</strong>，是前期最稳定的收入来源。
-            </div>
-
-            <div class="danger-box">
-                🚨 <strong>坑5：别一个人闷头玩！</strong><br>
-                这游戏的核心是社交。一个人玩和一群人玩完全是两个游戏。
-                加入一个活跃的 <strong>「小镇联盟」</strong>，资源共享、任务互助，效率翻倍。
-            </div>
-
-            <div class="tip-box" style="margin-top:16px;">
-                ✅ <strong>正确的资源分配优先级：</strong><br>
-                工作台 ＞ 农田 ＞ 牧场 ＞ 商店 ＞ 装饰<br>
-                （先保证生产力，再考虑好看）
-            </div>
-        </section>
-
-        <!-- ===== 模块五：每日必做清单 ===== -->
-        <section class="section" id="daily">
-            <h2 class="section-title"><span class="icon">✅</span> 每日必做清单</h2>
-
-            <ul class="checklist">
-                <li class="done">📅 每日签到（第7天有隐藏大奖！）</li>
-                <li class="done">🌾 收菜 / 收牧场（别让作物枯萎，枯萎不返还）</li>
-                <li class="done">🛒 跑商路 × 3次（稳定金币来源）</li>
-                <li class="done">📋 完成每日任务（5个，约10分钟搞定）</li>
-                <li class="done">💬 和3个好友互动（浇水/点赞/串门均可）</li>
-                <li class="done">🎣 钓鱼/挖矿（体力别溢出，溢出就浪费了）</li>
-                <li class="done">🏪 查看商店折扣（每天10点刷新，手慢无）</li>
-                <li class="done">📬 检查邮箱（经常有活动奖励/补偿）</li>
-                <li>🌟 联盟任务（有就做，奖励很丰厚）</li>
-                <li>🎯 限时活动（优先做，限定奖励错过就没了）</li>
-            </ul>
-
-            <div class="tip-box" style="margin-top:16px;">
-                ⏰ <strong>最佳上线时间：</strong><br>
-                早上 <strong>10:00</strong>（商店刷新）和晚上 <strong>20:00</strong>（活动开启）是黄金时间，
-                记得定闹钟！
-            </div>
-
-            <div class="card-grid" style="margin-top:20px;">
-                <div class="card-item">
-                    <div class="card-icon">⏱️</div>
-                    <h4>每日耗时</h4>
-                    <p>约 30~45 分钟即可完成全部</p>
+        <!-- 新增：每日打卡清单模块 -->
+        <div id="daily">
+            <h2 class="section-title">✅ 每日任务打卡清单</h2>
+            <div class="checklist-card">
+                <p style="margin-bottom:15px;color:var(--text-gray);">💡 勾选已完成的任务，看看今天的完成进度吧！</p>
+                
+                <div class="checklist-item">
+                    <input type="checkbox" id="task1" onchange="updateProgress()">
+                    <label for="task1">完成3个日常对话</label>
+                    <span class="reward">+50金币</span>
                 </div>
-                <div class="card-item">
-                    <div class="card-icon">💰</div>
-                    <h4>每日收入</h4>
-                    <p>稳定 8000~15000 金币 + 少量钻石</p>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task2" onchange="updateProgress()">
+                    <label for="task2">给作物浇水/收获1次</label>
+                    <span class="reward">+30金币</span>
                 </div>
-                <div class="card-item">
-                    <div class="card-icon">📈</div>
-                    <h4>成长速度</h4>
-                    <p>坚持30天可达小镇中上水平</p>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task3" onchange="updateProgress()">
+                    <label for="task3">访问好友小岛并留言</label>
+                    <span class="reward">+40金币</span>
                 </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task4" onchange="updateProgress()">
+                    <label for="task4">完成小镇订单1次</label>
+                    <span class="reward">+80金币</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task5" onchange="updateProgress()">
+                    <label for="task5">给店铺补货/上架商品</label>
+                    <span class="reward">+60金币</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">今日进度：0/5（0%）</div>
             </div>
-        </section>
-
-        <!-- ===== 模块六：实用小技巧 ===== -->
-        <section class="section" id="tips">
-            <h2 class="section-title"><span class="icon">💡</span> 实用小技巧（老玩家私藏）</h2>
-
-            <div class="card-grid">
-                <div class="card-item">
-                    <div class="card-icon">🐾</div>
-                    <h4>宠物快速升级</h4>
-                    <p>喂食「金色苹果」经验翻倍，每日限量3个，别喂普通食物浪费次数</p>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon">💰</div>
-                    <h4>赚钱最快方式</h4>
-                    <p>不是开店！是 <strong>「花店」</strong>。种玫瑰→做花束→卖出，利润率最高达300%</p>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon">🏠</div>
-                    <h4>扩容技巧</h4>
-                    <p>仓库满了别扩建！先把低价值物品 <strong>「卖给NPC」</strong>，NPC回收价不低的</p>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon">🎣</div>
-                    <h4>钓鱼玄学</h4>
-                    <p>下雨天 + 晚上8点后 = 稀有鱼概率翻倍，亲测有效！</p>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon">📸</div>
-                    <h4>拍照拿奖励</h4>
-                    <p>每天在「打卡点」拍照发社区，有概率获得 <strong>限定装饰</strong></p>
-                </div>
-                <div class="card-item">
-                    <div class="card-icon">🔄</div>
-                    <h4>体力别浪费</h4>
-                    <p>睡前把体力用到只剩50，第二天自然回满，多出半天的体力</p>
-                </div>
-            </div>
-
-            <div class="tip-box" style="margin-top:20px;">
-                🧠 <strong>终极心法：</strong><br>
-                这游戏不卷，佛系玩也很开心。别和大佬比进度，按自己节奏来，
-                享受建造和社交的乐趣才是最重要的！💖
-            </div>
-
-            <div class="highlight-box" style="margin-top:16px;">
-                📋 <strong>一句话总结：</strong><br>
-                主线跟紧 → 钻石存好 → 好友多加 → 商路别忘 → 佛系心态 = 快乐小镇生活 🏡✨
-            </div>
-        </section>
-
+        </div>
     </div>
 
-    <!-- ===== 页脚 ===== -->
-    <footer class="footer">
-        <p>🎮 心动小镇新手攻略 · 2025 最新版</p>
-        <p style="margin-top:8px;">Made with 💕 by GameGuide | 转载请注明出处</p>
-        <p style="margin-top:8px; font-size:0.8rem;">
-            <a href="#">GitHub 源码</a> &nbsp;|&nbsp;
-            <a href="#">反馈建议</a> &nbsp;|&nbsp;
-            <a href="#">更多攻略</a>
-        </p>
-    </footer>
+    <!-- 底部 -->
+    <div class="footer">
+        <p>© 2025 心动小镇新手攻略 | 持续更新，一起在小镇里生活吧~ 💖</p>
+    </div>
 
+    <script>
+        // 打卡进度计算脚本
+        function updateProgress() {
+            const totalTasks = 5;
+            let completedTasks = 0;
+            
+            for (let i = 1; i <= totalTasks; i++) {
+                const checkbox = document.getElementById(`task${i}`);
+                if (checkbox.checked) {
+                    completedTasks++;
+                }
+            }
+
+            const progressPercent = (completedTasks / totalTasks) * 100;
+            document.getElementById('progressFill').style.width = `${progressPercent}%`;
+            document.getElementById('progressText').innerText = `今日进度：${completedTasks}/${totalTasks}（${progressPercent}%）`;
+        }
+
+        // 页面加载时，恢复本地存储的勾选状态（刷新不丢失）
+        window.onload = function() {
+            for (let i = 1; i <= 5; i++) {
+                const checkbox = document.getElementById(`task${i}`);
+                const stored = localStorage.getItem(`task${i}`);
+                if (stored === 'true') {
+                    checkbox.checked = true;
+                }
+            }
+            updateProgress();
+        }
+
+        // 勾选状态变化时，保存到本地存储
+        document.querySelectorAll('.checklist-item input').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(this.id, this.checked);
+            });
+        });
+    </script>
 </body>
 </html>
